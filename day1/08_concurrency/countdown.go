@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+const write ="write"
+const sleep = "sleep"
+
+
 type Sleeper interface{
 	Sleep()
 }
@@ -25,16 +29,21 @@ type DefaultSleeper struct{}
 func (d*DefaultSleeper) Sleep(){
 	time.Sleep(1*time.Second)
 }
+ 
+
 
 func main()  {
 	sleeper := &DefaultSleeper{}
-	Countdonwn(os.Stdout, sleeper)
+	Countdown(os.Stdout, sleeper)
 }
 
-func Countdonwn(out io.Writer, sleeper Sleeper) {
+func Countdown(out io.Writer, sleeper Sleeper) {
 	for i:=3; i>0; i--{
 		fmt.Fprintln(out, i);
 		sleeper.Sleep()
 	}
+
+	
+
 	fmt.Fprint(out, "Go!")
 }
